@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import path from 'path'
 import react from '@vitejs/plugin-react'
 import copy from 'rollup-plugin-copy'
+import tranferManifest from './plugins/rollup-plugin-transfer-manifest'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,7 +13,8 @@ export default defineConfig({
         { src: './manifest.json', dest: 'dist' }
       ],
       hook: "writeBundle"
-    })
+    }),
+    tranferManifest()
   ],
   build: {
     rollupOptions: {
