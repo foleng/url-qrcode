@@ -14,13 +14,18 @@ export default defineConfig({
       ],
       hook: "writeBundle"
     }),
-    tranferManifest()
+    tranferManifest({
+      contentScript: {
+        entry: path.resolve(__dirname, 'popup.html')
+      }
+    })
   ],
   build: {
     rollupOptions: {
       input: {
         background: path.resolve(__dirname, 'background.html'),
         popup: path.resolve(__dirname, 'popup.html'),
+        content: path.resolve(__dirname, 'content.html')
       },
     },
   }
