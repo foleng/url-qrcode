@@ -5,8 +5,7 @@ import './index.css'
 
 const shadowContainer = document.createElement("div");
 shadowContainer.setAttribute("id", "shadow")
-const body = document.body;
-document.insertBefore(shadowContainer, document.body);
+document.body.insertAdjacentElement("afterend", shadowContainer);
 const shadow = shadowContainer.attachShadow({ mode: 'open' })
 
 if (!import.meta.env.DEV) {
