@@ -5,7 +5,7 @@ interface IContentScript {
 interface IOpts {
   contentScript?: IContentScript;
 }
-import { basename, extname, dirname } from 'path'
+import { basename, extname, dirname, posix } from 'path'
 import { writeFile, readFile } from 'node:fs/promises'
 import htmlToJson from 'html-to-json'
 import _ from 'lodash'
@@ -19,9 +19,7 @@ const writeContentFile = (url, dir) => {
   const src = chrome.extension.getURL('${url}');
   await import(src);
   })();`
-  console.log(">>>>>>>>>>>>", dir + url);
-
-  writeFile(dir + "content.js", template)
+  writeFile(dir + "/content.js", template)
 }
 
 
@@ -59,10 +57,8 @@ const transContentScript = (opts: IOpts = {}, options, bundle) => {
     }
     writeContentFile(filter(scripts, 'src', '.js')[0], dir)
     const target = _.merge(JSON.parse(defaultManifest.toString()), customManifest);
-    console.log(JSON.stringify(target));
-    setTimeout(() => {
-      writeFile("E:/me/url-qrcode/dest/" + "manifest.json", JSON.stringify(target))
-    }, 5000);
+    console.log(JSON.stringify(target), dir + "manifest.json");
+    writeFile(dir + "/manifest.json", JSON.stringify(target))
   })
 }
 

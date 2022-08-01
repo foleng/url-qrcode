@@ -8,15 +8,9 @@ import tranferManifest from './plugins/rollup-plugin-transfer-manifest'
 export default defineConfig({
   plugins: [
     react(),
-    copy({
-      targets: [
-        { src: './manifest.json', dest: 'dist' }
-      ],
-      hook: "writeBundle"
-    }),
     tranferManifest({
       contentScript: {
-        entry: path.resolve(__dirname, 'popup.html')
+        entry: path.resolve(__dirname, 'content.html')
       }
     })
   ],
